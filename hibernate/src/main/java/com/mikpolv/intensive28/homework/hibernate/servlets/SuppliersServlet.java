@@ -1,8 +1,8 @@
-package com.mikpolv.intensive28.homework.jdbc.servlets;
+package com.mikpolv.intensive28.homework.hibernate.servlets;
 
-import com.mikpolv.intensive28.homework.jdbc.services.ServiceFactory;
-import com.mikpolv.intensive28.homework.jdbc.services.SupplierService;
-import com.mikpolv.intensive28.homework.jdbc.enteties.Supplier;
+import com.mikpolv.intensive28.homework.hibernate.enteties.Supplier;
+import com.mikpolv.intensive28.homework.hibernate.services.ServiceFactory;
+import com.mikpolv.intensive28.homework.hibernate.services.SupplierService;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -16,7 +16,9 @@ import java.util.List;
 
 @WebServlet("/suppliers")
 public class SuppliersServlet extends HttpServlet {
-  private static final Logger LOGGER = LoggerFactory.getLogger(SuppliersServlet.class);
+  private static final Logger LOGGER =
+      LoggerFactory.getLogger(
+          com.mikpolv.intensive28.homework.jdbc.servlets.SuppliersServlet.class);
   private final SupplierService supplierService = ServiceFactory.getSupplierService();
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
