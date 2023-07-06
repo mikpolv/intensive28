@@ -1,8 +1,11 @@
-package com.mikpolv.intensive28.homework.jdbc.services;
+package com.mikpolv.intensive28.homework.hibernate.services;
 
+import com.mikpolv.intensive28.homework.jdbc.services.BrandService;
+import com.mikpolv.intensive28.homework.jdbc.services.ProductService;
+import com.mikpolv.intensive28.homework.jdbc.services.SupplierService;
+import com.mikpolv.intensive28.homework.jdbc.services.impl.DefaultBrandService;
 import com.mikpolv.intensive28.homework.jdbc.services.impl.DefaultProductService;
 import com.mikpolv.intensive28.homework.jdbc.services.impl.DefaultSupplierService;
-import com.mikpolv.intensive28.homework.jdbc.services.impl.DefaultBrandService;
 
 public class ServiceFactory {
   public static ProductService getProductService() {

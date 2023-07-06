@@ -1,8 +1,12 @@
-package com.mikpolv.intensive28.homework.jdbc.servlets;
+package com.mikpolv.intensive28.homework.hibernate.servlets;
 
+import com.mikpolv.intensive28.homework.jdbc.enteties.Brand;
+import com.mikpolv.intensive28.homework.jdbc.enteties.Product;
+import com.mikpolv.intensive28.homework.jdbc.servlets.SuppliersServlet;
+import com.mikpolv.intensive28.homework.hibernate.enteties.Resistor;
+import com.mikpolv.intensive28.homework.jdbc.services.BrandService;
 import com.mikpolv.intensive28.homework.jdbc.services.ProductService;
 import com.mikpolv.intensive28.homework.jdbc.services.ServiceFactory;
-import com.mikpolv.intensive28.homework.jdbc.enteties.Product;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,6 +21,7 @@ import java.io.PrintWriter;
 public class ProductServlet extends HttpServlet {
   private static final Logger LOGGER = LoggerFactory.getLogger(SuppliersServlet.class);
   private final ProductService productService = ServiceFactory.getProductService();
+  private final BrandService brandService = ServiceFactory.getBrandService();
 
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws IOException {
@@ -29,9 +34,11 @@ public class ProductServlet extends HttpServlet {
     try (PrintWriter printWriter = response.getWriter()) {
       printWriter.write("You can use parametrise action = ");
       printWriter.println();
-      printWriter.write("find(param: id), create(params: name, brand_id)");
+      printWriter.write(
+          "find(param: id), create_resistor(params: name, brand_id, part_number, resistance, voltage)");
       printWriter.println();
-      printWriter.write("remove(param: id), update(params: id, name, brand_id)");
+      printWriter.write(
+          "remove(param: id), update_resistor(params: id, name, brand_id, part_number, resistance, voltage)");
       printWriter.println();
 
       if (action.equals("find")) {
@@ -40,12 +47,22 @@ public class ProductServlet extends HttpServlet {
         Product product = productService.getProductById(id);
         printWriter.write(product.toString());
       }
-      if (action.equals("create")) {
+
+      if (action.equals("create_resistor")) {
         String productName = request.getParameter("name");
         LOGGER.info("Create. Name is provided {}", productName);
         int brandId = Integer.parseInt(request.getParameter("brand_id"));
         LOGGER.info("Create. BrandId is provided {}", brandId);
-        int newId = productService.createProduct(productName, brandId);
+        String partNumber = request.getParameter("part_number");
+        LOGGER.info("Create. Name is provided {}", productName);
+        long resistance = Long.parseLong(request.getParameter("resistance"));
+        LOGGER.info("Create. resistance is provided {}", resistance);
+        int voltage = Integer.parseInt(request.getParameter("voltage"));
+        LOGGER.info("Create. resistance is provided {}", voltage);
+        Brand brand = brandService.getBrandById(brandId);
+        Resistor resistorToAdd = new Resistor(productName, brand, partNumber, resistance, voltage);
+
+        int newId = productService.createProduct(resistorToAdd);
         if (newId < 0) {
           printWriter.write("Creation failed");
 
@@ -64,14 +81,24 @@ public class ProductServlet extends HttpServlet {
         }
       }
 
-      if (action.equals("update")) {
+      if (action.equals("update_resistor")) {
         int id = Integer.parseInt(request.getParameter("id"));
         LOGGER.info("Update. Id is provided {}", id);
         String productName = request.getParameter("name");
         LOGGER.info("Update. Name is provided {}", productName);
         int brandId = Integer.parseInt(request.getParameter("brand_id"));
         LOGGER.info("Update. Brand Id is provided {}", brandId);
-        if (productService.updateProduct(id, productName, brandId)) {
+        String partNumber = request.getParameter("part_number");
+        LOGGER.info("Create. Name is provided {}", productName);
+        long resistance = Long.parseLong(request.getParameter("resistance"));
+        LOGGER.info("Create. resistance is provided {}", resistance);
+        int voltage = Integer.parseInt(request.getParameter("voltage"));
+        LOGGER.info("Create. resistance is provided {}", voltage);
+        Brand brand = brandService.getBrandById(brandId);
+        Resistor resistorToUpdate =
+            new Resistor(id, productName, brand, partNumber, resistance, voltage);
+
+        if (productService.updateProduct(resistorToUpdate)) {
           printWriter.write("Product id = " + id + " updated!");
         } else {
           printWriter.write("Update failed");
