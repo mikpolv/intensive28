@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Brand</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/brands/{id}(id=${brand.id()})}" th:object="${brand}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <br/>
+  <input type="submit" value="Update!"/>
+</form>
+</body>
+</html>

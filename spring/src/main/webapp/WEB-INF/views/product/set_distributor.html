@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Set Distributor</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/products/{id}/set_distributor(id=${product.id()})}" th:object="${product}">
+
+    <label for="distributor">Select distributor:</label>
+    <select th:object="${distributor}" th:field="*{id}" id="distributor">
+        <option th:each="distributor : ${distributors}" th:value="${distributor.id()}"
+                th:text="${distributor.name()}"></option>
+    </select>
+    <br/>
+    <input type="submit" value="Set!"/>
+    <a href="/products">Products list</a>
+</form>
+</body>
+</html>

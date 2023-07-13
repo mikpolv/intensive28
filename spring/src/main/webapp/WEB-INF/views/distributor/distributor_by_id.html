@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Distributor</title>
+</head>
+<body>
+<p th:text="${distributor.id()}"></p>
+<p th:text="${distributor.name()}">distributor</p>
+<p th:text="${distributor.contact()}">distributor</p>
+
+<a th:href="@{/distributors/{id}/edit(id=${distributor.id()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/distributors/{id}(id=${distributor.id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

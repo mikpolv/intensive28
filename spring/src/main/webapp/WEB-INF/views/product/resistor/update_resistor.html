@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Resistor</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/products/resistors/{id}(id=${resistor.id()})}" th:object="${resistor}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <br/>
+  <input type="text" th:field="*{partNumber}" id="partNumber"/>
+  <br/>
+  <input type="text" th:field="*{resistance}" id="resistance"/>
+  <br/>
+  <input type="text" th:field="*{voltage}" id="voltage"/>
+  <br/>
+  <input type="text" th:field="*{brandName}" id="brandName"/>
+  <br/>
+  <br/>
+
+  <input type="submit" value="Update!"/>
+</form>
+</body>
+</html>

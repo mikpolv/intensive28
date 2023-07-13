@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resistor</title>
+</head>
+<body>
+<p th:text="${resistor.id()}"></p>
+<p th:text="${resistor.name()}">product</p>
+<p th:text="${resistor.partNumber()}">product</p>
+<p th:text="${resistor.brandName()}">product</p>
+<p th:text="${resistor.resistance}">product</p>
+<p th:text="${resistor.voltage}">product</p>
+
+<a th:href="@{/products/resistors/{id}/edit(id=${resistor.id()})}">Edit</a>
+<br/>
+<a th:href="@{/products/{id}/set_distributor(id=${resistor.id()})}">Ser Distributor</a>
+
+<form th:method="DELETE" th:action="@{/products/resistors/{id}(id=${resistor.id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Create wire</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/products/wires}" th:object="${wire}">
+    <label for="name">Enter wire name: </label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+
+    <label for="partNumber">Enter part number: </label>
+    <input type="text" th:field="*{partNumber}" id="partNumber"/>
+    <br/>
+
+    <label for="brand">Select brand:</label>
+    <select th:object="${brand}" th:field="*{id}" id="brand">
+        <option th:each="brand : ${brands}" th:value="${brand.id()}"
+                th:text="${brand.name()}"></option>
+    </select>
+    <br/>
+
+    <label for="awg">Enter AWG: </label>
+    <input type="text" th:field="*{awg}" id="awg"/>
+    <br/>
+
+    <label for="outsideDiameter">Enter outsideDiameter: </label>
+    <input type="text" th:field="*{outsideDiameter}" id="outsideDiameter"/>
+    <br/>
+
+    <input type="submit" value="Create!"/>
+</form>
+</body>
+</html>
