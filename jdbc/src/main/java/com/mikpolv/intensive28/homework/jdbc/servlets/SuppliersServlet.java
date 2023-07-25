@@ -1,8 +1,8 @@
 package com.mikpolv.intensive28.homework.jdbc.servlets;
 
+import com.mikpolv.intensive28.homework.jdbc.enteties.Supplier;
 import com.mikpolv.intensive28.homework.jdbc.services.ServiceFactory;
 import com.mikpolv.intensive28.homework.jdbc.services.SupplierService;
-import com.mikpolv.intensive28.homework.jdbc.enteties.Supplier;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

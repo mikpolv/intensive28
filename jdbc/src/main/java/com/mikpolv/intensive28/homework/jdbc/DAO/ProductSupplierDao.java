@@ -1,5 +1,7 @@
 package com.mikpolv.intensive28.homework.jdbc.DAO;
 
+import com.mikpolv.intensive28.homework.jdbc.enteties.Supplier;
+
 import java.util.List;
 
 /** Dao for join table many-to-many relationship */

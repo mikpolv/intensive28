@@ -1,4 +1,3 @@
-### HomeWork JDBC JPA
 Создается три сущности:
 <br>Product
 <br>Добавлены две дочерние сущности Wire и Resistor
