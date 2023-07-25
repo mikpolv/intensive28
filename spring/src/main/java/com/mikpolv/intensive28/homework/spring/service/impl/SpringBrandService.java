@@ -2,6 +2,7 @@ package com.mikpolv.intensive28.homework.spring.service.impl;
 
 import com.mikpolv.intensive28.homework.spring.exception.AlreadyExistException;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.BrandDao;
+import com.mikpolv.intensive28.homework.spring.persistence.dto.BrandRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Brand;
 import com.mikpolv.intensive28.homework.spring.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,6 @@ import java.util.Optional;
 public class SpringBrandService implements BrandService<Brand, Integer> {
   private final BrandDao<Brand, Integer> brandDao;
 
-  private record BrandRecord(Integer id, String name) {}
 
   @Autowired
   public SpringBrandService(BrandDao<Brand, Integer> brandDao) {
@@ -25,8 +25,8 @@ public class SpringBrandService implements BrandService<Brand, Integer> {
   }
 
   @Override
-  public Iterable<Record> getBrands() {
-    List<Record> listOfRecords = new ArrayList<>();
+  public List<BrandRecord> getBrands() {
+    List<BrandRecord> listOfRecords = new ArrayList<>();
 
     for (Brand b : brandDao.findAll()) {
       listOfRecords.add(new BrandRecord(b.getId(), b.getName()));
@@ -35,7 +35,7 @@ public class SpringBrandService implements BrandService<Brand, Integer> {
   }
 
   @Override
-  public Optional<Record> getBrandById(Integer id) {
+  public Optional<BrandRecord> getBrandById(Integer id) {
     Optional<Brand> optionalBrand = brandDao.getById(id);
     if (optionalBrand.isPresent()) {
       Brand brand = optionalBrand.get();

@@ -1,5 +1,6 @@
 package com.mikpolv.intensive28.homework.spring.web.controller;
 
+import com.mikpolv.intensive28.homework.spring.persistence.dto.ResistorRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Brand;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Resistor;
 import com.mikpolv.intensive28.homework.spring.service.BrandService;
@@ -30,7 +31,7 @@ public class ResistorController {
 
   @GetMapping("/{id}")
   public String getResistorById(@PathVariable("id") int id, Model model) {
-    Optional<Record> optionalRecord = resistorService.getResistorById(id);
+    Optional<ResistorRecord> optionalRecord = resistorService.getResistorById(id);
     if (optionalRecord.isPresent()) {
       model.addAttribute("resistor", optionalRecord.get());
       return "product/resistor/resistor_by_id";
@@ -66,7 +67,7 @@ public class ResistorController {
 
   @GetMapping("/{id}/edit")
   public String editResistor(Model model, @PathVariable int id) {
-    Optional<Record> optionalResistorRecord = resistorService.getResistorById(id);
+    Optional<ResistorRecord> optionalResistorRecord = resistorService.getResistorById(id);
     if (optionalResistorRecord.isPresent()) {
       Record resistorRecord = optionalResistorRecord.get();
       model.addAttribute("resistor", resistorRecord);

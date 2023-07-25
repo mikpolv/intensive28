@@ -2,6 +2,7 @@ package com.mikpolv.intensive28.homework.spring.service.impl;
 
 import com.mikpolv.intensive28.homework.spring.persistence.dao.DistributorDao;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.ProductDao;
+import com.mikpolv.intensive28.homework.spring.persistence.dto.ProductRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Distributor;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Product;
 import com.mikpolv.intensive28.homework.spring.service.ProductService;
@@ -29,11 +30,9 @@ public class SpringProductService implements ProductService<Product, Integer> {
     this.distributorDao = distributorDao;
   }
 
-  private record ProductRecord(Integer id, String name, String partNumber) {}
-
   @Override
-  public Iterable<Record> getProducts() {
-    List<Record> listOfRecords = new ArrayList<>();
+  public List<ProductRecord> getProducts() {
+    List<ProductRecord> listOfRecords = new ArrayList<>();
 
     for (Product p : productDao.findAllProducts()) {
       listOfRecords.add(new ProductRecord(p.getId(), p.getName(), p.getPartNumber()));
@@ -42,7 +41,7 @@ public class SpringProductService implements ProductService<Product, Integer> {
   }
 
   @Override
-  public Optional<Record> getProductById(Integer id) {
+  public Optional<ProductRecord> getProductById(Integer id) {
     Optional<Product> optionalProduct = productDao.getById(id);
     if (optionalProduct.isPresent()) {
       Product product = optionalProduct.get();

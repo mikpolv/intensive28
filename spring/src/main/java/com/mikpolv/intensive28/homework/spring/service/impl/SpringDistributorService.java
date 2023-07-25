@@ -2,6 +2,7 @@ package com.mikpolv.intensive28.homework.spring.service.impl;
 
 import com.mikpolv.intensive28.homework.spring.exception.AlreadyExistException;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.DistributorDao;
+import com.mikpolv.intensive28.homework.spring.persistence.dto.DistributorRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Distributor;
 import com.mikpolv.intensive28.homework.spring.service.DistributorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,14 @@ import java.util.Optional;
 public class SpringDistributorService implements DistributorService<Distributor, Integer> {
   private final DistributorDao<Distributor, Integer> distributorDao;
 
-  private record DistributorRecord(Integer id, String name, String contact) {}
-
   @Autowired
   public SpringDistributorService(DistributorDao<Distributor, Integer> distributorDao) {
     this.distributorDao = distributorDao;
   }
 
   @Override
-  public Iterable<Record> getDistributors() {
-    List<Record> listOfRecords = new ArrayList<>();
+  public List<DistributorRecord> getDistributors() {
+    List<DistributorRecord> listOfRecords = new ArrayList<>();
 
     for (Distributor d : distributorDao.findAll()) {
       listOfRecords.add(new DistributorRecord(d.getId(), d.getName(), d.getContact()));
@@ -35,7 +34,7 @@ public class SpringDistributorService implements DistributorService<Distributor,
   }
 
   @Override
-  public Optional<Record> getDistributorById(Integer id) {
+  public Optional<DistributorRecord> getDistributorById(Integer id) {
     Optional<Distributor> optionalDistributor = distributorDao.getById(id);
     if (optionalDistributor.isPresent()) {
       Distributor distributor = optionalDistributor.get();

@@ -1,5 +1,6 @@
 package com.mikpolv.intensive28.homework.spring.web.controller;
 
+import com.mikpolv.intensive28.homework.spring.persistence.dto.BrandRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Brand;
 import com.mikpolv.intensive28.homework.spring.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class BrandController {
 
   @GetMapping("/{id}")
   public String getBrandById(@PathVariable("id") int id, Model model) {
-    Optional<Record> optionalRecord = brandService.getBrandById(id);
+    Optional<BrandRecord> optionalRecord = brandService.getBrandById(id);
     if (optionalRecord.isPresent()) {
       model.addAttribute("brand", optionalRecord.get());
       return "brand/brand_by_id";
@@ -51,7 +52,7 @@ public class BrandController {
 
   @GetMapping("/{id}/edit")
   public String editBrand(Model model, @PathVariable int id) {
-    Optional<Record> optionalBrandRecord = brandService.getBrandById(id);
+    Optional<BrandRecord> optionalBrandRecord = brandService.getBrandById(id);
     optionalBrandRecord.ifPresent(record -> model.addAttribute("brand", record));
     return "brand/update_brand";
   }

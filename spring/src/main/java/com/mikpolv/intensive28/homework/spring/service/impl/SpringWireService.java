@@ -3,6 +3,7 @@ package com.mikpolv.intensive28.homework.spring.service.impl;
 import com.mikpolv.intensive28.homework.spring.exception.DAOException;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.BrandDao;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.WireDao;
+import com.mikpolv.intensive28.homework.spring.persistence.dto.WireRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Brand;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Wire;
 import com.mikpolv.intensive28.homework.spring.service.WireService;
@@ -20,14 +21,6 @@ public class SpringWireService implements WireService<Wire, Integer> {
   private final WireDao<Wire, Integer> wireDao;
   private final BrandDao<Brand, Integer> brandDao;
 
-  public record WireRecord(
-      Integer id,
-      String name,
-      String partNumber,
-      String brandName,
-      String awg,
-      BigDecimal outsideDiameter) {}
-
   @Autowired
   public SpringWireService(WireDao<Wire, Integer> wireDao, BrandDao<Brand, Integer> brandDao) {
     this.wireDao = wireDao;
@@ -35,7 +28,7 @@ public class SpringWireService implements WireService<Wire, Integer> {
   }
 
   @Override
-  public Optional<Record> getWireById(Integer id) {
+  public Optional<WireRecord> getWireById(Integer id) {
 
     Optional<Wire> optionalWire = wireDao.getById(id);
     if (optionalWire.isPresent()) {

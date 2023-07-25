@@ -1,5 +1,6 @@
 package com.mikpolv.intensive28.homework.spring.web.controller;
 
+import com.mikpolv.intensive28.homework.spring.persistence.dto.DistributorRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Distributor;
 import com.mikpolv.intensive28.homework.spring.service.DistributorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class DistributorController {
 
   @GetMapping("/{id}")
   public String getDistributorById(@PathVariable("id") int id, Model model) {
-    Optional<Record> optionalRecord = distributorService.getDistributorById(id);
+    Optional<DistributorRecord> optionalRecord = distributorService.getDistributorById(id);
     if (optionalRecord.isPresent()) {
       model.addAttribute("distributor", optionalRecord.get());
       return "distributor/distributor_by_id";
@@ -42,15 +43,14 @@ public class DistributorController {
   }
 
   @PostMapping()
-  public String createDistributor(
-      @ModelAttribute("distributor") Distributor distributor) {
+  public String createDistributor(@ModelAttribute("distributor") Distributor distributor) {
     distributorService.createDistributor(distributor);
     return "redirect:/distributors";
   }
 
   @GetMapping("/{id}/edit")
   public String editDistributor(Model model, @PathVariable int id) {
-    Optional<Record> optionalDistributorRecord = distributorService.getDistributorById(id);
+    var optionalDistributorRecord = distributorService.getDistributorById(id);
 
     optionalDistributorRecord.ifPresent(record -> model.addAttribute("distributor", record));
 

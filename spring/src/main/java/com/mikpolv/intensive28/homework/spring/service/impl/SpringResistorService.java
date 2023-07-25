@@ -3,6 +3,7 @@ package com.mikpolv.intensive28.homework.spring.service.impl;
 import com.mikpolv.intensive28.homework.spring.exception.DAOException;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.BrandDao;
 import com.mikpolv.intensive28.homework.spring.persistence.dao.ResistorDao;
+import com.mikpolv.intensive28.homework.spring.persistence.dto.ResistorRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.*;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Resistor;
 import com.mikpolv.intensive28.homework.spring.service.ResistorService;
@@ -19,14 +20,6 @@ public class SpringResistorService implements ResistorService<Resistor, Integer>
   private final ResistorDao<Resistor, Integer> resistorDao;
   private final BrandDao<Brand, Integer> brandDao;
 
-  public record ResistorRecord(
-      Integer id,
-      String name,
-      String partNumber,
-      String brandName,
-      Long resistance,
-      Integer voltage) {}
-
   @Autowired
   public SpringResistorService(
       ResistorDao<Resistor, Integer> resistorDao, BrandDao<Brand, Integer> brandDao) {
@@ -35,7 +28,7 @@ public class SpringResistorService implements ResistorService<Resistor, Integer>
   }
 
   @Override
-  public Optional<Record> getResistorById(Integer id) {
+  public Optional<ResistorRecord> getResistorById(Integer id) {
 
     Optional<Resistor> optionalResistor = resistorDao.getById(id);
     if (optionalResistor.isPresent()) {

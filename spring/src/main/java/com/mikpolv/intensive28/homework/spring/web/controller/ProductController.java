@@ -1,5 +1,6 @@
 package com.mikpolv.intensive28.homework.spring.web.controller;
 
+import com.mikpolv.intensive28.homework.spring.persistence.dto.ProductRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Distributor;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Product;
 import com.mikpolv.intensive28.homework.spring.service.DistributorService;
@@ -37,7 +38,7 @@ public class ProductController {
 
   @GetMapping("/{id}")
   public String getProductById(@PathVariable("id") int id, Model model) {
-    Optional<Record> optionalRecord = productService.getProductById(id);
+    Optional<ProductRecord> optionalRecord = productService.getProductById(id);
 
     if (optionalRecord.isPresent()) {
       String productType = productService.getProductType(id);
@@ -62,7 +63,7 @@ public class ProductController {
 
   @GetMapping("/{id}/set_distributor")
   public String setDistributor(Model model, @PathVariable String id) {
-    Optional<Record> optionalRecord = productService.getProductById(Integer.parseInt(id));
+    Optional<ProductRecord> optionalRecord = productService.getProductById(Integer.parseInt(id));
     optionalRecord.ifPresent(record -> model.addAttribute("product", record));
     model.addAttribute("distributors", distributorService.getDistributors());
     model.addAttribute("distributor", new Distributor());

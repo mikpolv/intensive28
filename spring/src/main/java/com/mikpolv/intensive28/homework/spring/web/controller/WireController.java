@@ -1,5 +1,6 @@
 package com.mikpolv.intensive28.homework.spring.web.controller;
 
+import com.mikpolv.intensive28.homework.spring.persistence.dto.WireRecord;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Brand;
 import com.mikpolv.intensive28.homework.spring.persistence.model.Wire;
 import com.mikpolv.intensive28.homework.spring.service.BrandService;
@@ -30,7 +31,7 @@ public class WireController {
 
   @GetMapping("/{id}")
   public String getWireById(@PathVariable("id") int id, Model model) {
-    Optional<Record> optionalRecord = wireService.getWireById(id);
+    Optional<WireRecord> optionalRecord = wireService.getWireById(id);
     if (optionalRecord.isPresent()) {
       model.addAttribute("wire", optionalRecord.get());
       return "product/wire/wire_by_id";
@@ -66,7 +67,7 @@ public class WireController {
 
   @GetMapping("/{id}/edit")
   public String editWire(Model model, @PathVariable int id) {
-    Optional<Record> optionalWireRecord = wireService.getWireById(id);
+    Optional<WireRecord> optionalWireRecord = wireService.getWireById(id);
     if (optionalWireRecord.isPresent()) {
       Record wireRecord = optionalWireRecord.get();
       model.addAttribute("wire", wireRecord);
