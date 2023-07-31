@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+</head>
+<body>
+<p th:text="${product.id()}"></p>
+<p th:text="${product.name()}">product</p>
+<p th:text="${product.partNumber()}">product</p>
+
+<a th:href="@{/productss/{id}/edit(id=${product.id()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/products/{id}(id=${product.id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

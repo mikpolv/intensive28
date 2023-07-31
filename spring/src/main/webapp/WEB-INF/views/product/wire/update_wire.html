@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Wire</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/products/wires/{id}(id=${wire.id()})}" th:object="${wire}">
+  <label for="name">Enter name: </label>
+  <input type="text" th:field="*{name}" id="name"/>
+  <br/>
+  <input type="text" th:field="*{partNumber}" id="partNumber"/>
+  <br/>
+  <input type="text" th:field="*{awg}" id="awg"/>
+  <br/>
+  <input type="text" th:field="*{outsideDiameter}" id="outsideDiameter"/>
+  <br/>
+  <input type="text" th:field="*{brandName}" id="brandName"/>
+  <br/>
+  <br/>
+
+  <input type="submit" value="Update!"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wire</title>
+</head>
+<body>
+<p th:text="${wire.id()}"></p>
+<p th:text="${wire.name()}">product</p>
+<p th:text="${wire.partNumber()}">product</p>
+<p th:text="${wire.brandName()}">product</p>
+<p th:text="${wire.awg}">product</p>
+<p th:text="${wire.outsideDiameter}">product</p>
+
+<a th:href="@{/products/wires/{id}/edit(id=${wire.id()})}">Edit</a>
+<br/>
+<a th:href="@{/products/{id}/set_distributor(id=${wire.id()})}">Ser Distributor</a>
+
+<form th:method="DELETE" th:action="@{/products/wires/{id}(id=${wire.id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>

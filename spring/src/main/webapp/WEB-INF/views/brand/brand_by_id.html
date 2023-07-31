@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Brand</title>
+</head>
+<body>
+<p th:text="${brand.id()}"></p>
+
+<p th:text="${brand.name()}">brand</p>
+
+<a th:href="@{/brands/{id}/edit(id=${brand.id()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/brands/{id}(id=${brand.id()})}">
+    <input type="submit" value="Delete"/>
+</form>
+</body>
+</html>
